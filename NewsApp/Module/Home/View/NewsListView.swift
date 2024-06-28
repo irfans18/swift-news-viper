@@ -9,15 +9,19 @@ import SwiftUI
 
 struct NewsListView: View {
     @ObservedObject var presenter: NewsListPresenter
+    @State private var selected: Article?
+
     
     var body: some View {
         List(presenter.articles) { article in
-            VStack(alignment: .leading) {
-                Text(article.title)
-                    .font(.headline)
-                Text(article.description ?? "No Desc")
-                    .font(.subheadline)
-            }
+            ArticleView(article: article)
+                .onTapGesture {
+                    selected = article
+                }
+        }
+        .listStyle(.plain)
+        .sheet(item: $selected) { article in
+            ExternalLinkView(url: article.articleURL)
         }
         .onAppear {
             self.presenter.fetchArticles()
@@ -35,14 +39,8 @@ struct NewsListView_Previews: PreviewProvider {
 }
 
 class MockNewsListInteractor: NewsListInteractor {
-    func fetchArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
-        // Simulate mock data for preview
-        let mockArticles = [
-            Article(title: "Mock Article 1", description: "Description for mock article 1"),
-            Article(title: "Mock Article 2", description: "Description for mock article 2"),
-            Article(title: "Mock Article 3", description: "Description for mock article 3")
-        ]
-        completion(.success(mockArticles))
+    override func fetchArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
+        completion(.success(Article.previewData))
     }
 }
 #endif
