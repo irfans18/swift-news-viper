@@ -41,8 +41,8 @@ struct ArticleService {
         }.resume()
     }
 
-    func fetch(from category: Category) async throws -> [Article] {
-        let url = generateUrl(from: category)
+    func fetch(from category: Category, q: String?) async throws -> [Article] {
+        let url = generateUrl(from: category, q: q)
         let (data, response) = try await session.data(from: url)
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -69,7 +69,7 @@ struct ArticleService {
         return NSError(domain: "ArticleService", code: code, userInfo: [NSLocalizedDescriptionKey: description])
     }
 
-    private func generateUrl(from category: Category) -> URL {
+    private func generateUrl(from category: Category, q: String?) -> URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "newsapi.org"
@@ -79,6 +79,9 @@ struct ArticleService {
             URLQueryItem(name: "language", value: "en"),
             URLQueryItem(name: "category", value: category.rawValue)
         ]
+        if let query = q, !query.isEmpty {
+            components.queryItems?.append(URLQueryItem(name: "q", value: query))
+        }
         return components.url!
     }
 }

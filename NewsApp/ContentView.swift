@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var presenter: NewsListPresenter
+    @EnvironmentObject var presenter: NewsPresenter
     
     var body: some View {
-        NavigationView {
-            NewsListView(presenter: presenter)
-                .navigationTitle("Top Business News")
-        }
+        NewsListView(presenter: presenter)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(NewsPresenter(interactor: NewsListInteractor()))
     }
 }

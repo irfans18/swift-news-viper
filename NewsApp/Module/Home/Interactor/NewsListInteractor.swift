@@ -9,7 +9,7 @@ import Foundation
 
 protocol NewsListInteractorProtocol: AnyObject {
     func fetchArticles(completion: @escaping (Result<[Article], Error>) -> Void)
-    func fetchArticles(from category: Category, completion: @escaping (Result<[Article], Error>) -> Void)
+    func fetchArticles(from category: Category, q: String, completion: @escaping (Result<[Article], Error>) -> Void)
 }
 
 class NewsListInteractor: NewsListInteractorProtocol {
@@ -30,10 +30,10 @@ class NewsListInteractor: NewsListInteractorProtocol {
         }
     }
 
-    func fetchArticles(from category: Category, completion: @escaping (Result<[Article], Error>) -> Void) {
+    func fetchArticles(from category: Category = .general, q: String, completion: @escaping (Result<[Article], Error>) -> Void) {
         Task {
             do {
-                let articles = try await articleService.fetch(from: category)
+                let articles = try await articleService.fetch(from: category, q: q)
                 completion(.success(articles))
             } catch {
                 completion(.failure(error))

@@ -12,7 +12,7 @@ struct NewsAppApp: App {
     var body: some Scene {
            WindowGroup {
                ContentView()
-                   .environmentObject(NewsListPresenter(interactor: NewsListInteractorImpl()))
+                   .environmentObject(NewsPresenter(interactor: NewsListInteractor()))
            }
        }
    }
