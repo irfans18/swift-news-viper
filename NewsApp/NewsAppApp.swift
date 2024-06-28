@@ -10,8 +10,9 @@ import SwiftUI
 @main
 struct NewsAppApp: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+           WindowGroup {
+               ContentView()
+                   .environmentObject(NewsListPresenter(interactor: NewsListInteractorImpl()))
+           }
+       }
+   }

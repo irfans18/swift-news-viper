@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var presenter: NewsListPresenter
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            NewsListView(presenter: presenter)
+                .navigationTitle("Top Business News")
+        }
     }
 }
 
