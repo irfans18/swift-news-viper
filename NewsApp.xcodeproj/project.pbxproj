@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FAA866232C2FC5DF004CFF8F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FAA866222C2FC5DE004CFF8F /* README.md */; };
+		FAA866282C2FC82A004CFF8F /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = FAA866272C2FC82A004CFF8F /* screenshot.png */; };
 		FAAA9BF32C2E6316004BF053 /* NewsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA9BF22C2E6316004BF053 /* NewsAppApp.swift */; };
 		FAAA9BF52C2E6316004BF053 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA9BF42C2E6316004BF053 /* ContentView.swift */; };
 		FAAA9BF72C2E631A004BF053 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAAA9BF62C2E631A004BF053 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FAA866222C2FC5DE004CFF8F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FAA866272C2FC82A004CFF8F /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		FAAA9BEF2C2E6316004BF053 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAA9BF22C2E6316004BF053 /* NewsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppApp.swift; sourceTree = "<group>"; };
 		FAAA9BF42C2E6316004BF053 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,9 +58,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FAA866242C2FC7C5004CFF8F /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				FAA866272C2FC82A004CFF8F /* screenshot.png */,
+			);
+			path = Docs;
+			sourceTree = "<group>";
+		};
 		FAAA9BE62C2E6316004BF053 = {
 			isa = PBXGroup;
 			children = (
+				FAA866242C2FC7C5004CFF8F /* Docs */,
+				FAA866222C2FC5DE004CFF8F /* README.md */,
 				FAAA9BF12C2E6316004BF053 /* NewsApp */,
 				FAAA9BF02C2E6316004BF053 /* Products */,
 			);
@@ -247,7 +261,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAAA9BFA2C2E631A004BF053 /* Preview Assets.xcassets in Resources */,
+				FAA866282C2FC82A004CFF8F /* screenshot.png in Resources */,
 				FAAA9BF72C2E631A004BF053 /* Assets.xcassets in Resources */,
+				FAA866232C2FC5DF004CFF8F /* README.md in Resources */,
 				FAAA9C1C2C2E9CE7004BF053 /* tesla.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
