@@ -11,9 +11,10 @@ A SwiftUI-based iOS app built using VIPER architecture to fetch and display top 
 - Built with SwiftUI for modern and declarative UI design.
 - Follows VIPER architecture for clear separation of concerns and scalability.
 
-## Screenshots (Optional)
-Include screenshots or GIFs of your app in action. For example:
-![Screenshot](/Docs/screenshot.png)
+## Screenshots
+<img src="/Docs/screenshot.png" width="200">
+
+
 
 
 ## Requirements
