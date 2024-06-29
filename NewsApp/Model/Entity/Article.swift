@@ -13,6 +13,16 @@ fileprivate let relativeDateFormatter = RelativeDateTimeFormatter()
 struct Article {
     
     let id = UUID()
+    
+    enum CodingKeys: String, CodingKey {
+        case source
+        case title
+        case url
+        case publishedAt
+        case author
+        case description
+        case urlToImage
+    }
 
     let source: Source
     let title: String
@@ -22,10 +32,6 @@ struct Article {
     let author: String?
     let description: String?
     let urlToImage: String?
-    
-    var authorText: String {
-        author ?? ""
-    }
     
     var descriptionText: String {
         description ?? ""

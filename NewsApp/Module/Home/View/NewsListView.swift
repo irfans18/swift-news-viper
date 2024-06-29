@@ -17,8 +17,6 @@ struct NewsListView: View {
                 switch presenter.phase {
                 case .loading:
                     ProgressView()
-                case .empty:
-                    Text("No articles available.")
                 case .success(let articles):
                     List(articles) { article in
                         ArticleView(article: article)
@@ -33,6 +31,7 @@ struct NewsListView: View {
                     .navigationTitle(presenter.selectedCategory.text)
                     .navigationBarItems(trailing: menu)
                     .searchable(text: $presenter.searchText)
+                    .onSubmit(of: .search, presenter.loadArticles)
                 case .failure(let error):
                     Text("Failed to load articles: \(error.localizedDescription)")
                 }
@@ -43,8 +42,10 @@ struct NewsListView: View {
             .onChange(of: presenter.selectedCategory) { _ in
                 presenter.loadArticles()
             }
-            .onChange(of: presenter.searchText) { _ in
-                presenter.loadArticles()
+            .onChange(of: presenter.searchText) { searchText in
+                if searchText.isEmpty {
+                    presenter.loadArticles()
+                }
             }
             .onAppear {
                 self.presenter.loadArticles()
@@ -77,7 +78,7 @@ struct NewsListView_Previews: PreviewProvider {
 }
 
 class MockNewsListInteractor: NewsListInteractor {
-    override func fetchArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
+    func fetchArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
         completion(.success(Article.previewData))
     }
 }

@@ -8,8 +8,7 @@
 import Foundation
 
 protocol NewsListInteractorProtocol: AnyObject {
-    func fetchArticles(completion: @escaping (Result<[Article], Error>) -> Void)
-    func fetchArticles(from category: Category, q: String, completion: @escaping (Result<[Article], Error>) -> Void)
+    func fetchArticles(from category: Category, q: String?, completion: @escaping (Result<[Article], Error>) -> Void)
 }
 
 class NewsListInteractor: NewsListInteractorProtocol {
@@ -19,21 +18,15 @@ class NewsListInteractor: NewsListInteractorProtocol {
         self.articleService = articleService
     }
 
-    func fetchArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
-        articleService.fetchArticles { result in
-            switch result {
-            case .success(let articles):
-                completion(.success(articles))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-
-    func fetchArticles(from category: Category = .general, q: String, completion: @escaping (Result<[Article], Error>) -> Void) {
+    func fetchArticles(from category: Category = .general, q: String?, completion: @escaping (Result<[Article], Error>) -> Void) {
         Task {
             do {
-                let articles = try await articleService.fetch(from: category, q: q)
+                var articles:[Article] = []
+                if let query = q, !query.isEmpty {
+                    articles = try await articleService.fetch(query: query)
+                }else{
+                    articles = try await articleService.fetch(from: category)
+                }
                 completion(.success(articles))
             } catch {
                 completion(.failure(error))
